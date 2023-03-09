@@ -36,7 +36,7 @@ const Header = ({type}) => {
   return (
     
     <div className='header'>
-        <div className={console.log(type) ? 'headerContainer listMode' : 'headerContainer'}>
+        <div className={type === "list" ? 'headerContainer listMode' : 'headerContainer'}>
 
             <div className='headerList'>
                 <div className='headerListItem active'>
