@@ -119,9 +119,9 @@
     height: 30px;
     border: 1px solid #bd74f8;
     border-radius: 100%;
-    color: #bd74f8;
+    color: white;
     cursor: pointer;
-    background-color: white;
+    background-color: rgb(61, 145, 255);;
 }
 .optionCounterButton:disabled {
     cursor: not-allowed;

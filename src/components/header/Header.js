@@ -70,7 +70,7 @@ const Header = ({type}) => {
                 <p className='headerDesc'>
                     Nhận ưu đãi 10% khi đăng ký tài khoản và nhiều ưu đãi hấp dẫn !
                 </p>
-                <button className='headerBtn'>Sign In / Register</button>
+                <button className='headerBtn'>Đăng Nhập / Đăng Ký</button>
                 <div className='headerSearch'>
                     <div className='headerSearchItem'>
                         <FontAwesomeIcon icon={faBed} className="headerIcon" />
