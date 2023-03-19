@@ -50,27 +50,27 @@ const Header = ({type}) => {
             <div className='headerList'>
                 <div className='headerListItem active'>
                     <FontAwesomeIcon icon={faBed} />
-                    <span>Stays</span>
+                    <span>Lưu trú</span>
                 </div>
 
                 <div className='headerListItem'>
                     <FontAwesomeIcon icon={faPlane} />
-                    <span>Flights</span>
+                    <span>Chuyến bay</span>
                 </div>
 
                 <div className='headerListItem'>
                     <FontAwesomeIcon icon={faCar} />
-                    <span>Car Rentals</span>
+                    <span>Thuê xe</span>
                 </div>
 
                 <div className='headerListItem'>
                     <FontAwesomeIcon icon={faBed} />
-                    <span>Attractions</span>
+                    <span>Địa điểm tham quan</span>
                 </div>
 
                 <div className='headerListItem'>
                     <FontAwesomeIcon icon={faTaxi} />
-                    <span>Airport Taxi</span>
+                    <span>Taxi Sân bay</span>
                 </div>
             </div>
             { type !== "list" && 
