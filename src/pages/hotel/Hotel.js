@@ -1,10 +1,14 @@
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons"
+import { faCircleArrowLeft, faCircleArrowRight, faCircleXmark, faLocationDot } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { useState } from "react"
 import Header from "../../components/header/Header"
 import Navbar from "../../components/navbar/Navbar"
 import "./Hotel.css"
 
 const Hotel = () => {
+  const [slideNumber,setSlideNumber] = useState(0);
+  const [open,setOpen] = useState(false);
+
   const photos = [
     {src: "https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"},
     {src: "https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"},
@@ -14,11 +18,38 @@ const Hotel = () => {
     {src: "https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}
   ]
 
+  const handleOpen = (i) => {
+    setSlideNumber(i);
+    setOpen(true);
+  } 
+
+  const handleMove = (direction) => {
+    let newSlideNumber;
+    if(direction === "l"){
+      newSlideNumber = slideNumber === 0 ? (photos.length-1) : slideNumber-1;
+    }else{
+      newSlideNumber = slideNumber === (photos.length-1) ? 0 : slideNumber+1;
+    }
+
+    setSlideNumber(newSlideNumber);
+  }
+
   return (
     <div>
       <Navbar/>
       <Header type="list"/>
       <div className="hotelContainer">
+        { open && <div className="slider">
+
+          <FontAwesomeIcon icon={faCircleXmark} className="close" onClick={()=> setOpen(false)}/>
+          <FontAwesomeIcon icon={faCircleArrowLeft} className="arrow" onClick={()=>handleMove("l")}/>
+          <div className="sliderWrapper">
+            <img src={photos[slideNumber].src} className="sliderImg"/>
+
+          </div>
+          <FontAwesomeIcon icon={faCircleArrowRight} className="arrow" onClick={()=>handleMove("r")}/>
+        </div>}
+
         <div className="hotelWrapper">
           <button className="bookNow">Đặt ngay</button>
           <h1 className="hotelTitle">Dalat Wind Hotel</h1>
@@ -35,9 +66,9 @@ const Hotel = () => {
             Nhanh tay đặt ngay với giá hấp dẫn
           </span>
           <div className="hotelImages">
-            {photos.map(photo => (
+            {photos.map((photo,index) => (
               <div className="hotelImgWrapper">
-                <img src={photo.src} alt="" className="hotelImg" />
+                <img onClick={()=>handleOpen(index)} src={photo.src} alt="" className="hotelImg" />
               </div>
             ))}
           </div>
