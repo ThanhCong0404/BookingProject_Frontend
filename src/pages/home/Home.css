@@ -1,3 +1,9 @@
+body{
+    margin:0;
+    padding:0;
+    background: linear-gradient(0deg, rgb(246, 157, 243) 28%, rgb(248, 178, 178) 79%);
+}
+
 .homeContainer{
     margin-top: 50px;
     display: flex;
