@@ -15,9 +15,9 @@ const Home = () => {
         <Header/>
         <div className='homeContainer'>
           <Featured/>
-          <h1 className='homeTitle'>Tieu de</h1>
+          <h1 className='homeTitle'>Tìm theo loại chỗ nghỉ</h1>
           <PropertyList/>
-          <h1 className='homeTitle'>Tieu de</h1>
+          <h1 className='homeTitle'>Nổi Bật</h1>
           <FeaturedProperties/>
           <MailList/>
           <Footer/>
