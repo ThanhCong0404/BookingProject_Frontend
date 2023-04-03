@@ -5,14 +5,24 @@ import { useLocation } from 'react-router-dom'
 import Header from '../../components/header/Header'
 import Navbar from '../../components/navbar/Navbar'
 import SearchItem from '../../components/searchItem/SearchItem'
+import useFetch from '../../hooks/useFetch'
 import "./List.css"
 
 const List = () => {
-  const location = useLocation();
-  const [destination,setDestination] = useState(location.state.destination);
+  const location = useLocation(); // lay thong tin tu trang useNavigate() đến
+  const [destination,setDestination] = useState(location.state.destination); // diem den 
   const [date,setDate] = useState(location.state.date);
   const [openDate,setOpenDate] = useState(false);
   const [options,setOptions] = useState(location.state.options);
+  const [min,setMin] = useState(undefined);
+  const [max,setMax] = useState(undefined);
+
+  
+  const {data,loading,error,reFetch} = useFetch(`/hotels?city=${destination}&min=${min || 0}&max=${max || 99999999999999}`); //proxy root config in packake.json
+
+  const handleClick = ()=>{
+    reFetch()
+  }
   
 
   return (
@@ -39,11 +49,11 @@ const List = () => {
                   <div className='lsOptionItems'>
                     <div className='lsOptionItem'>
                       <span className='lsOptionText'>Giá tối thiểu<small>/đêm </small></span>
-                      <input type="number" className='lsOptionInput' ></input>
+                      <input type="number" onChange={e=>setMin(e.target.value)} className='lsOptionInput' ></input>
                     </div>
                     <div className='lsOptionItem'>
                       <span className='lsOptionText'>Giá tối đa<small>/đêm </small></span>
-                      <input type="number" className='lsOptionInput'></input>
+                      <input type="number" onChange={e=>setMax(e.target.value)} className='lsOptionInput'></input>
                     </div>
                     
                   </div>
@@ -64,18 +74,17 @@ const List = () => {
                   </div>
                 </div>
               </div>
-              <button>Tìm</button>
+              <button onClick={handleClick}>Tìm</button>
             </div>
             
           </div>
           <div className='listResult'>
-            <SearchItem/>
-            <SearchItem/>
-            <SearchItem/>
-            <SearchItem/>
-            <SearchItem/>
-            <SearchItem/>
-            <SearchItem/>
+            {loading ? "loading..." : <>
+              {data.map(item=>(
+                <SearchItem item={item} key={item._id}/>
+              ))}
+            </>}
+            
           </div>
         </div>
       </div>
