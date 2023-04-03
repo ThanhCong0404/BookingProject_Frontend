@@ -1,12 +1,13 @@
+import { Link } from "react-router-dom"
 import "./SearchItem.css"
 
-const SearchItem = () => {
+const SearchItem = ({item}) => {
   return (
     <div className="searchItem">
-        <img src="https://images.pexels.com/photos/15760049/pexels-photo-15760049.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" className="siImg"/>
+        <img src={item.photos[0]} alt="" className="siImg"/>
         <div className="siDesc">
-            <h1 className="siTitle">Dalat Wind Hotel</h1>
-            <span className="siDistance">Cách trung tâm 0,7km</span>
+            <h1 className="siTitle">{item.name}</h1>
+            <span className="siDistance">Cách trung tâm {item.distance}m</span>
             <span className="siTaxiOp">Chỗ đỗ xe miễn phí</span>
             <span className="siSubtitle">
                 Chỗ nghỉ Du lịch Bền vững 
@@ -21,14 +22,17 @@ const SearchItem = () => {
 
         </div>
         <div className="siDetails">
-            <div className="siRating">
+           { item.rating &&  <div className="siRating">
                 <span>Tuyệt</span>
-                <button>8.9</button>
-            </div>
+                <button>{item.rating}</button>
+            </div>}
             <div className="siDetailTexts">
-                <span className="siPrice">1.250.000 VND</span>
+                <span className="siPrice">{item.cheapestPrice} VND</span>
                 <span className="siTaxOp">Đã bao gồm thuế và phí</span>
-                <button className="siCheckButton">Xem chổ trống</button>
+                
+                <Link to={`/hotels/${item._id}`}>
+                    <button className="siCheckButton">Xem chổ trống</button>
+                </Link>
             </div>
         </div>
     </div>
