@@ -11,7 +11,7 @@ import "./List.css"
 const List = () => {
   const location = useLocation(); // lay thong tin tu trang useNavigate() đến
   const [destination,setDestination] = useState(location.state.destination); // diem den 
-  const [date,setDate] = useState(location.state.date);
+  const [dates,setDates] = useState(location.state.dates);
   const [openDate,setOpenDate] = useState(false);
   const [options,setOptions] = useState(location.state.options);
   const [min,setMin] = useState(undefined);
@@ -40,8 +40,8 @@ const List = () => {
               </div>
               <div className='lsItem'>
                 <label>Ngày:</label>
-                <span onClick={()=> setOpenDate(!openDate)}>{`${format(date[0].startDate,"dd/MM/yyyy")} đến ${format(date[0].endDate,"dd/MM/yyyy")}`}</span>
-                {openDate && <DateRange className='date' onChange={(item) => setDate([item.selection])} ranges={date} minDate={new Date()}/>}
+                <span onClick={()=> setOpenDate(!openDate)}>{`${format(dates[0].startDate,"dd/MM/yyyy")} đến ${format(dates[0].endDate,"dd/MM/yyyy")}`}</span>
+                {openDate && <DateRange className='date' onChange={(item) => setDates([item.selection])} ranges={dates} minDate={new Date()}/>}
               </div>
               <div className='lsItem'>
                 <label>Tùy chọn:</label>
