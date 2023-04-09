@@ -3,7 +3,7 @@ import { createContext, useReducer } from "react";
 
 const INIT_STATE= { //khởi tạo state ban đầu cho thanh Search
     city: undefined,
-    dates:[],
+    dates:[], //luu vao index 0
     options:{
         adult:undefined,
         children:undefined,
