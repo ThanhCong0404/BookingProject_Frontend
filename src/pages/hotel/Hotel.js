@@ -1,9 +1,11 @@
 import { faCircleArrowLeft, faCircleArrowRight, faCircleXmark, faLocationDot } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useContext, useState } from "react"
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import Header from "../../components/header/Header"
 import Navbar from "../../components/navbar/Navbar"
+import Reserve from "../../components/reserve/Reserve"
+import { AuthContext } from "../../context/AuthContext"
 import { SearchContext } from "../../context/SearchContext"
 import useFetch from "../../hooks/useFetch"
 import "./Hotel.css"
@@ -13,10 +15,15 @@ const Hotel = () => {
   const id = location.pathname.split("/")[2];
   const [slideNumber,setSlideNumber] = useState(0);
   const [open,setOpen] = useState(false);
+  const [openModal,setOpenModal] = useState(false);
 
   const {data,loading,error,reFetch} = useFetch(`/hotels/find/${id}`); //proxy root config in packake.json
 
+  
+  const {user} = useContext(AuthContext);
+
   const {dates,options} = useContext(SearchContext);
+  const navigate = useNavigate();
   
   const MILISECONS_PER_DAY = 1000 * 60 *60 *24;
   function dayDifference(date1,date2){
@@ -25,10 +32,7 @@ const Hotel = () => {
     return diffDays;
   }
 
-  const days = dayDifference(dates[0].endDate,dates[0].startDate);
-
-
- 
+  const days = dayDifference(dates[0].endDate,dates[0].startDate); 
 
   const handleOpen = (i) => {
     setSlideNumber(i);
@@ -44,6 +48,16 @@ const Hotel = () => {
     }
 
     setSlideNumber(newSlideNumber);
+  }
+
+
+  const handleClick= ()=>{
+    if(user){
+      setOpenModal(true);
+    }else {
+      navigate("login");
+    }
+
   }
 
   return (
@@ -100,12 +114,16 @@ const Hotel = () => {
               <h2>
                 <b>${days * data.cheapestPrice * options.room} VND</b> ({days} đêm)
               </h2>
-              <button>Đặt ngay</button>
+              <button onClick={handleClick}>Đặt ngay</button>
             </div>
           </div>
         </div>
 
       </div>}
+
+
+
+      {openModal && <Reserve setOpen={setOpenModal} hotelId={id} />}
     </div>
   )
 }
