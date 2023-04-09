@@ -8,6 +8,7 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 import {format} from 'date-fns'
 import { useNavigate } from 'react-router-dom'
 import { SearchContext } from '../../context/SearchContext'
+import { AuthContext } from '../../context/AuthContext'
 
 const Header = ({type}) => {
     const [destination,setDestination] = useState("");
@@ -29,6 +30,9 @@ const Header = ({type}) => {
     });
 
     const navigate = useNavigate();
+
+    
+  const {user} = useContext(AuthContext);
 
     const handleOption = (name , operation) => {
         setOptions(prev => {return {
@@ -81,9 +85,9 @@ const Header = ({type}) => {
                 <>
                 <h1 className='headerTitle'>Nhiều Ưu Đãi Hấp Dẵn</h1>
                 <p className='headerDesc'>
-                    Nhận ưu đãi 10% khi đăng ký tài khoản và nhiều ưu đãi hấp dẫn !
+                    Nhận ưu đãi 10% và rất nhiều ưu đãi hấp dẫn !
                 </p>
-                <button className='headerBtn'>Đăng Nhập / Đăng Ký</button>
+                { !user && <button className='headerBtn'>Đăng Nhập / Đăng Ký</button>}
                 <div className='headerSearch'>
                     <div className='headerSearchItem'>
                         <FontAwesomeIcon icon={faBed} className="headerIcon" />
