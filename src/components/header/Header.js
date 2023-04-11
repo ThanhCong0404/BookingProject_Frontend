@@ -6,7 +6,7 @@ import { DateRange } from 'react-date-range'
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import {format} from 'date-fns'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { SearchContext } from '../../context/SearchContext'
 import { AuthContext } from '../../context/AuthContext'
 
@@ -87,7 +87,7 @@ const Header = ({type}) => {
                 <p className='headerDesc'>
                     Nhận ưu đãi 10% và rất nhiều ưu đãi hấp dẫn !
                 </p>
-                { !user && <button className='headerBtn'>Đăng Nhập / Đăng Ký</button>}
+                { !user && <Link to="/login"><button className='headerBtn'>Đăng Nhập / Đăng Ký</button></Link>}
                 <div className='headerSearch'>
                     <div className='headerSearchItem'>
                         <FontAwesomeIcon icon={faBed} className="headerIcon" />
